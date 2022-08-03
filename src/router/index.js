@@ -14,13 +14,13 @@ const routes = [
   {
     path: '/g6',
     name: 'G6',
-    component: () => import(/* webpackChunkName: "about" */ '../views/G6/index.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/G6/index.vue')
   },
   {
     path: '/d3',
     name: 'D3',
     components: {
-      default: () => import(/* webpackChunkName: "about" */ '../views/D3/index.vue'),
+      default: () => import(/* webpackChunkName: "about" */ '@/views/D3/index.vue'),
       aside: LeftNav
     }
   },
@@ -28,16 +28,27 @@ const routes = [
     path: '/d3/lineChart',
     name: 'LineChart',
     components: {
-      default: () => import(/* webpackChunkName: "about" */ '../views/D3/common/LineChart.vue'),
+      default: () => import(/* webpackChunkName: "about" */ '@/views/D3/common/LineChart.vue'),
       aside: LeftNav
     }
   }, {
     path: '/d3/histogram',
     name: 'Histogram',
     components: {
-      default: () => import(/* webpackChunkName: "about" */ '../views/D3/common/Histogram.vue'),
+      default: () => import(/* webpackChunkName: "about" */ '@/views/D3/common/Histogram.vue'),
       aside: LeftNav
     }
+  }, {
+    path: '/d3/axis',
+    name: 'Axis',
+    components: {
+      default: () => import(/* webpackChunkName: "about" */ '@/views/D3/common/Axis.vue'),
+      aside: LeftNav
+    }
+  }, {
+    path: '/echarts',
+    name: 'ECharts',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/ECharts/index.vue')
   }
 ]
 

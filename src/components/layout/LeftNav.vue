@@ -1,11 +1,8 @@
 <template>
     <el-menu
-        mode="el-menu-vertical-demo"
+        mode="vertical"
         class="leftNav"
-        router
-        background-color="#409EFF"
-        text-color="#fff"
-        active-text-color="#ffd04b">
+        router>
         <el-menu-item v-for="(route, index) in routes" :key="index" :index="route.url">
             {{ route.title }}
         </el-menu-item>
@@ -26,6 +23,9 @@ export default {
       }, {
         title: '折线图',
         url: '/d3/lineChart'
+      }, {
+        title: '轴图',
+        url: '/d3/axis'
       }]
     }
   }
@@ -33,6 +33,7 @@ export default {
 </script>
 <style lang="less">
 .leftNav {
+  height: calc(100vh - 120px);
   &.el-menu {
     margin: -20px;
     border: 1px solid #E2E2E2;

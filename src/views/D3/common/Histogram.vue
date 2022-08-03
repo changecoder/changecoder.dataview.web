@@ -39,6 +39,15 @@ export default {
         const translate = [barWidth * i, 0]
         return 'translate(' + translate + ')'
       }) // 实际是计算每一项值的x坐标
+
+    svg.selectAll('text')
+      .data(dataset)
+      .enter()
+      .append('text')
+      .text(d => d)
+      .attr('y', d => svgHeight - d - 10)
+      .attr('x', (_, i) => barWidth * i + 15)
+      .attr('fill', '#A64C38')
   }
 }
 </script>

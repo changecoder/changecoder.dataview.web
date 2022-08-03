@@ -4,6 +4,7 @@
             <el-menu
                 mode="horizontal"
                 router
+                @select="handleSelect"
                 background-color="#409EFF"
                 text-color="#fff"
                 active-text-color="#ffd04b">
@@ -12,8 +13,8 @@
                 </el-menu-item>
             </el-menu>
         </el-header>
-        <el-container>
-            <el-aside>
+        <el-container class="layout_content">
+            <el-aside v-if="isAsideShow">
               <router-view name="aside" />
             </el-aside>
             <el-main>
@@ -41,15 +42,15 @@ export default {
         title: 'D3',
         url: '/d3'
       }, {
-        title: '知识图谱',
-        url: '/knowledgeGraph'
-      }, {
-        title: '数据血缘',
-        url: '/dataLineage'
-      }, {
-        title: '知识表示',
-        url: '/knowledgeRepresentation'
-      }]
+        title: 'ECharts',
+        url: '/echarts'
+      }],
+      isAsideShow: false
+    }
+  },
+  methods: {
+    handleSelect (key) {
+      this.isAsideShow = key.startsWith('/d3')
     }
   }
 }
@@ -57,6 +58,9 @@ export default {
 <style scoped>
 .el-header {
     padding: 0;
+}
+.layout_content {
+  min-height: calc(100vh - 120px);
 }
 .el-aside {
     padding: 20px;
