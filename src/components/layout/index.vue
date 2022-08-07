@@ -4,13 +4,22 @@
             <el-menu
                 mode="horizontal"
                 router
-                @select="handleSelect"
                 background-color="#409EFF"
                 text-color="#fff"
                 active-text-color="#ffd04b">
-                <el-menu-item v-for="(route, index) in routes" :key="index" :index="route.url">
-                    {{ route.title }}
-                </el-menu-item>
+                <template v-for="(route, index) in routes">
+                  <el-submenu v-if="route.children" :key="index" :index="route.url" >
+                    <template slot="title">{{ route.title }}</template>
+                    <el-menu-item v-for="(child, idx) in route.children" :key="idx" :index="child.url">
+                      {{ child.title }}
+                    </el-menu-item>
+                  </el-submenu>
+                  <template v-else>
+                    <el-menu-item  :key="index" :index="route.url">
+                      {{ route.title }}
+                    </el-menu-item>
+                  </template>
+                </template>
             </el-menu>
         </el-header>
         <el-container class="layout_content">
@@ -28,6 +37,8 @@
 </template>
 
 <script>
+import { ASIDE_ROUTE_LIST } from '@/constants/route'
+
 export default {
   name: 'AppLayout',
   data () {
@@ -36,21 +47,36 @@ export default {
         title: '前端可视化',
         url: '/'
       }, {
-        title: 'G6',
-        url: '/g6'
+        title: '前端框架',
+        url: '/dataview',
+        children: [
+          {
+            title: 'G6',
+            url: '/g6'
+          }, {
+            title: 'D3',
+            url: '/d3'
+          }, {
+            title: 'ECharts',
+            url: '/echarts'
+          }
+        ]
       }, {
-        title: 'D3',
-        url: '/d3'
+        title: 'SVG',
+        url: '/svg'
       }, {
-        title: 'ECharts',
-        url: '/echarts'
+        title: 'Canvas',
+        url: '/canvas'
+      }, {
+        title: 'WebGL',
+        url: '/webgl'
       }],
       isAsideShow: false
     }
   },
-  methods: {
-    handleSelect (key) {
-      this.isAsideShow = key.startsWith('/d3')
+  watch: {
+    '$route' (to, from) {
+      this.isAsideShow = ASIDE_ROUTE_LIST.includes(to.name)
     }
   }
 }

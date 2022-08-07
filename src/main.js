@@ -8,6 +8,8 @@ import * as usedElements from '@/elements'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/theme.less'
 
+import 'default-passive-events'
+
 Vue.config.productionTip = false
 
 Object.keys(usedElements).forEach(key => Vue.use(usedElements[key]))

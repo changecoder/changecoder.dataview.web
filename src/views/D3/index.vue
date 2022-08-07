@@ -3,13 +3,19 @@
   <div class="data-view">
     D3
   </div>
+  <dynamic-chart></dynamic-chart>
 </div>
 
 </template>
 
 <script>
+import DynamicChart from './Dynamic.vue'
+
 export default {
-  name: 'D3Page'
+  name: 'D3Page',
+  components: {
+    DynamicChart
+  }
 }
 </script>
 

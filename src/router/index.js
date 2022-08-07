@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import DataView from '@/views/DataView/index.vue'
 import LeftNav from '@/components/layout/LeftNav.vue'
-
+import NotFound from '@/components/NotFound.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +21,14 @@ const routes = [
     name: 'D3',
     components: {
       default: () => import(/* webpackChunkName: "about" */ '@/views/D3/index.vue'),
+      aside: LeftNav
+    }
+  },
+  {
+    path: '/d3/circle',
+    name: 'Circle',
+    components: {
+      default: () => import(/* webpackChunkName: "about" */ '@/views/D3/common/Circle.vue'),
       aside: LeftNav
     }
   },
@@ -49,6 +57,10 @@ const routes = [
     path: '/echarts',
     name: 'ECharts',
     component: () => import(/* webpackChunkName: "about" */ '@/views/ECharts/index.vue')
+  }, {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 

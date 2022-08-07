@@ -18,6 +18,9 @@ export default {
         title: 'D3首页',
         url: '/d3'
       }, {
+        title: '圆图',
+        url: '/d3/circle'
+      }, {
         title: '柱状图',
         url: '/d3/histogram'
       }, {
