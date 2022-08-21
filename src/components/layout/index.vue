@@ -70,6 +70,9 @@ export default {
       }, {
         title: 'WebGL',
         url: '/webgl'
+      }, {
+        title: 'Others',
+        url: '/others'
       }],
       isAsideShow: false
     }

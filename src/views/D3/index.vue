@@ -1,11 +1,9 @@
 <template>
-<div>
-  <div class="data-view">
-    D3
+  <div>
+    <div class="data-view">
+      <dynamic-chart></dynamic-chart>
+    </div>
   </div>
-  <dynamic-chart></dynamic-chart>
-</div>
-
 </template>
 
 <script>

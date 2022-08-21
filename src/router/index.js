@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import DataView from '@/views/DataView/index.vue'
 import LeftNav from '@/components/layout/LeftNav.vue'
+import G6LeftNav from '@/components/layout/G6LeftNav.vue'
 import NotFound from '@/components/NotFound.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,7 +16,18 @@ const routes = [
   {
     path: '/g6',
     name: 'G6',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/G6/index.vue')
+    components: {
+      default: () => import(/* webpackChunkName: "about" */ '@/views/G6/index.vue'),
+      aside: G6LeftNav
+    }
+  },
+  {
+    path: '/g6/decisionTree',
+    name: 'DecisionTree',
+    components: {
+      default: () => import(/* webpackChunkName: "about" */ '@/views/G6/DecisionTree.vue'),
+      aside: G6LeftNav
+    }
   },
   {
     path: '/d3',
@@ -54,9 +67,21 @@ const routes = [
       aside: LeftNav
     }
   }, {
+    path: '/svg',
+    name: 'SVG',
+    component: () => import(/* webpackChunkName: "svg" */ '@/views/Svg/index.vue')
+  }, {
+    path: '/canvas',
+    name: 'Canvas',
+    component: () => import(/* webpackChunkName: "svg" */ '@/views/Canvas/index.vue')
+  }, {
     path: '/echarts',
     name: 'ECharts',
     component: () => import(/* webpackChunkName: "about" */ '@/views/ECharts/index.vue')
+  }, {
+    path: '/others',
+    name: 'Others',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Others/index.vue')
   }, {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

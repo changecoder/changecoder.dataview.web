@@ -6,5 +6,7 @@ export {
   Footer,
   Menu,
   Submenu,
-  MenuItem
+  MenuItem,
+  Tree,
+  Input
 } from 'element-ui'
