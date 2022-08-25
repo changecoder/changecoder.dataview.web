@@ -38,6 +38,14 @@ const routes = [
     }
   },
   {
+    path: '/d3/tree',
+    name: 'Tree',
+    components: {
+      default: () => import(/* webpackChunkName: "about" */ '@/views/D3/Tree.vue'),
+      aside: LeftNav
+    }
+  },
+  {
     path: '/d3/circle',
     name: 'Circle',
     components: {

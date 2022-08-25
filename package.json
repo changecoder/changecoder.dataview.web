@@ -16,6 +16,7 @@
     "d3": "^7.6.1",
     "default-passive-events": "^2.0.0",
     "element-ui": "^2.15.9",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
