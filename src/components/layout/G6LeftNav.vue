@@ -20,6 +20,9 @@ export default {
       }, {
         title: '顶部对齐缩进树',
         url: '/g6/decisionTree'
+      }, {
+        title: '主数据血缘',
+        url: '/g6/bloodGraph'
       }]
     }
   }

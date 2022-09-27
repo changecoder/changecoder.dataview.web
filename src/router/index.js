@@ -30,6 +30,13 @@ const routes = [
     }
   },
   {
+    path: '/g6/bloodGraph',
+    name: 'BloodGraph',
+    components: {
+      default: () => import(/* webpackChunkName: "about" */ '@/views/G6/Lineage.vue')
+    }
+  },
+  {
     path: '/d3',
     name: 'D3',
     components: {
