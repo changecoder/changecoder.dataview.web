@@ -30,35 +30,39 @@ export default {
           ]
         },
         nodes: [
-          { id: 'node1', x: 250, y: 200, comboId: 'combo1', type: 'moduleRect', value: 10 },
-          { id: 'node2', x: 500, y: 200, comboId: 'combo2', type: 'moduleRect', value: 20 }
+          { id: 'node1', x: 250, y: 200, width: 300, comboId: 'combo1', type: 'moduleRect', value: 10 },
+          { id: 'node2', x: 270, y: 300, width: 300, comboId: 'combo2', type: 'moduleRect', value: 20 },
+          { id: 'node3', x: 290, y: 400, width: 300, height: 80, comboId: 'combo3', type: 'moduleRect', value: 20 },
+          { id: 'node4', x: 290, y: 500, width: 300, height: 80, comboId: 'combo3', type: 'moduleRect', value: 20 },
+          { id: 'node5', x: 290, y: 600, width: 300, height: 80, comboId: 'combo3', type: 'moduleRect', value: 20 }
         ],
         combos: [
           { id: 'combo1', type: 'rootRect' },
-          { id: 'combo2', type: 'appRect' }
+          { id: 'combo2', type: 'appRect', parentId: 'combo1' },
+          { id: 'combo3', type: 'entityRect', parentId: 'combo2' }
         ]
       },
       graphInstance: {}
     }
   },
   mounted () {
-    this.register()
     const el = document.getElementById('container')
     const width = el.scrollWidth
-    const height = el.scrollHeight || 500
+    const height = el.scrollHeight || 800
     this.createGraph(width, height)
+    this.register()
     this.renderGraph()
     this.bindEvents()
   },
   methods: {
     register () {
-      const { collapseIcon } = this
+      const { collapseIcon, graphInstance } = this
       G6.registerCombo(
         'rootRect',
         {
           drawShape: function drawShape (cfg, group) {
             const self = this
-            cfg.padding = cfg.padding || [50, 20, 20, 20]
+            cfg.padding = cfg.padding || [20, 20, 20, 20]
             const style = self.getShapeStyle(cfg)
             const rect = group.addShape('rect', {
               attrs: {
@@ -71,6 +75,11 @@ export default {
               name: 'combo-root'
             })
             return rect
+          },
+          afterUpdate: function afterUpdate (cfg, combo) {
+            if (cfg.collapsed) {
+              graphInstance.uncombo(cfg.id)
+            }
           }
         },
         'rect'
@@ -81,7 +90,7 @@ export default {
         {
           drawShape: function drawShape (cfg, group) {
             const self = this
-            cfg.padding = cfg.padding || [50, 20, 20, 20]
+            cfg.padding = cfg.padding || [20, 20, 20, 20]
             const style = self.getShapeStyle(cfg)
             const rect = group.addShape('rect', {
               attrs: {
@@ -98,6 +107,30 @@ export default {
         },
         'rect'
       )
+
+      G6.registerCombo(
+        'entityRect',
+        {
+          drawShape: function drawShape (cfg, group) {
+            const self = this
+            cfg.padding = cfg.padding || [20, 20, 20, 20]
+            const style = self.getShapeStyle(cfg)
+            const rect = group.addShape('rect', {
+              attrs: {
+                ...style,
+                x: -style.width / 2 - (cfg.padding[3] - cfg.padding[1]) / 2,
+                y: -style.height / 2 - (cfg.padding[0] - cfg.padding[2]) / 2,
+                width: style.width,
+                height: style.height
+              },
+              name: 'combo-entity'
+            })
+            return rect
+          }
+        },
+        'rect'
+      )
+
       G6.registerNode(
         'moduleRect',
         {
@@ -110,8 +143,8 @@ export default {
                 ...style,
                 x: -style.width / 2 - (cfg.padding[3] - cfg.padding[1]) / 2,
                 y: -style.height / 2 - (cfg.padding[0] - cfg.padding[2]) / 2,
-                width: style.width,
-                height: style.height
+                width: cfg.width || style.width,
+                height: cfg.height || style.height
               }
             })
 
