@@ -1,45 +1,56 @@
-export default class Graph {
-  nodes = [] // 节点集合
+import AbstractGraph from '@/core/graph/AbstractGraph'
 
-  edges = [] // 关系线集合
+import { appendGraph, appendGroup } from '@/core/graph/svg/graph'
 
-  combos = [] // 组合集
-
-  /**
-   * 节点遍历
-   * @param {*} func
-   */
-  node = (func) => {
-    this.nodes.forEach(node => {
-      Object.assign(node, func(node))
-    })
+export default class Graph extends AbstractGraph {
+  constructor (cfg) {
+    super()
+    this.cfg = Object.assign({}, this.getDefaultCfg(), cfg)
+    this.init()
   }
 
-  /**
-   * 注册事件
-   * @param {*} name
-   * @param {*} func
-   */
-  on = (name, func) => {
+  initCanvas = () => {
+    const container = this.get('container')
+    const canvas = appendGraph(container)
+    this.set('canvas', canvas)
+  }
+
+  initGroups = () => {
+    const canvas = this.get('canvas')
+    const height = this.get('height')
+    const width = this.get('height')
+    const group = appendGroup(canvas, width, height)
+    this.set('group', group)
+  }
+
+  data = (data) => {
+    this.set('data', data)
+  }
+
+  render = () => {
+    const data = this.get('data')
+
+    const { nodes = [], edges = [], combos = [] } = data
+
+    this.clear()
+
+    this.addItems(nodes.map(node => ({ type: 'node', model: node })))
+
+    this.addCombos(combos)
+
+    this.addItems(edges.map(edge => ({ type: 'edge', model: edge })))
+
+    // layout
+    const layoutController = this.get('layoutController')
+
+    layoutController?.layout()
+  }
+
+  initEventController = () => {
 
   }
 
-  /**
-   * 触发节点状态更新
-   * @param {*} node
-   * @param {*} name
-   * @param {*} value
-   */
-  setItemState = (node, name, value) => {
-
-  }
-
-  /**
-   * 注册节点
-   * @param {*} typeName
-   * @param {*} nodeDefinition
-   */
-  registerNode = (typeName, nodeDefinition) => {
+  initLayoutController = () => {
 
   }
 }

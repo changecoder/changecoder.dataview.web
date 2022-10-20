@@ -49,6 +49,8 @@ Node属性
 
 ## graph对象方法属性
 
+## Shape
+
 ### graph.registerNode
 graph.registerNode(typeName: string, nodeDefinition: object)
 ```
